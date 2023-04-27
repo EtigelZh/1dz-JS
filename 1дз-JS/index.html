@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+        function findMaxDivisorsNum(n) 
+        {
+            let maxDivisors = 0;
+            let number = 0;
+            for (let i = 1; i <= n; i++) 
+            {
+                let divisors = countDivisors(i);
+                if (divisors > maxDivisors) 
+                {
+                    maxDivisors = divisors;
+                    number = i;
+                }
+            }
+            return number;
+        }
+        function countDivisors(num) 
+        {
+            let divisors = 0;
+            for (let i = 1; i <= num; i++) 
+            {
+                if (num % i == 0) 
+                {
+                    divisors++;
+                }
+            }
+            return divisors;
+        }
+        let n = +prompt('n=')
+
+        if (isNaN(parseInt(n)) || !isFinite(n) || n<=0) 
+        {
+            alert("Ошибочное число");
+        }
+        else if (n%1 !==0)
+        {
+            alert("Ошибочное число");
+        }
+        else {
+        let max = findMaxDivisorsNum(n);
+        let kol = countDivisors(max);
+        document.write('<h1>Задание 1</h1>');
+        document.write('<h2 align = "center">Число: '+max+' с количеством делителей: '+kol+'</h2>');
+
+        /////////////////////////////////////////////////////////////////////////
+
+        document.write('<h1>Задание 2</h1>');
+
+        let width = 100;
+        let tt = 100/n;
+        document.write('<hr width="'+width+'%">')
+        for(let i = 1; i<n; i++)
+        {
+            width = width - tt;
+            document.write('<hr width="'+width+'%">');
+        }
+        let k = 0;
+        document.write('<table border = "1" width = "30%" height = "400px" align = "center">');
+        let whc = 'white';
+        let blc = 'black'
+        for(let i = 1; i<=n; i++)
+        {
+            if(k == 2)
+            {
+                k=0;
+                let temp = whc;
+                whc = blc;
+                blc = temp;
+
+            }
+            document.write('<tr>')
+            for(let j = 1; j<=n; j++)
+            {
+                if (j % 2 == 0)
+                {
+                    document.write('<td bgcolor ='+whc+'></td>')
+                }
+                else
+                {
+                    document.write('<td bgcolor ='+blc+'></td>')
+                }
+            }
+            document.write('</tr>')
+            k++;
+        }
+        document.write('</table>')
+
+        document.write('<hr width="'+width+'%">');
+        for(let i = 1; i<n; i++)
+        {
+            width = width + tt;
+            document.write('<hr width="'+width+'%">');
+        }
+
+        ////////////////////////////////////////////////////
+
+        document.write('<h1>Задание 3</h1>');
+
+        let str = prompt('str = ');
+        str += " ";
+    
+        result = "";
+        newStr = "";
+        text = "";
+        b = true;
+        document.write(str+'<br>');
+        while( str.indexOf(" ") >= 0 )
+        {
+            newStr = str.slice(0, str.indexOf(" "));
+            if(newStr != "")
+            {
+                for (let i = newStr.length - 1; i>=0; i--)
+                {
+                    result += newStr[i];
+                }
+                for (let i = 0; i<newStr.length; i++)
+                {
+                    if(result[i] != newStr[i])
+                    {
+                        b = false
+                    }       
+                }
+                if (b == true)
+                {
+                    text = newStr + ' ';
+                }
+            }
+            b = true;
+            newStr = newStr + " ";
+            result = result + " ";
+            newStr = newStr.slice(newStr.indexOf(" ")+1);
+            result = result.slice(result.indexOf(" ")+1);
+            str = str.slice(str.indexOf(" ")+1);
+        }
+        if (text == "")
+        {
+            alert('Таких слов нет')
+        }
+        document.write(text);
+    }
+    </script>
+</body>
+</html>
